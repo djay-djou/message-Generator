@@ -1,3 +1,6 @@
+
+
+// imported a function to allow me to retrieve user input 
 const readline = require("readline")
 const rl = readline.createInterface({
     input: process.stdin, 
@@ -5,7 +8,7 @@ const rl = readline.createInterface({
 })
 
 
-
+// created differennt arrays with motivation astrological and funny quotes
 const motivationalQuotes = [
     "The only way to do great work is to love what you do. –steve Jobs",
     "Success is not the key to happiness. Happiness is the key to success. – Albert Schweitzer",
@@ -74,7 +77,7 @@ const astrologyMessages = [
     "Why did the rabbit go to the doctor? He had hare-loss!"
   ];
 
-
+// created a function to validate user input so that we can actually retrieve the right format for the date 
 const isValidDate = (userInput)=> {
     const parts = userInput.split("-")
 
@@ -99,23 +102,23 @@ const isValidDate = (userInput)=> {
 
 }
 
-
+// created a function that actually retrieve the user input, checks the astrological sign and retrieves a random message with the astrological funny quote and a motivational quote
 
 const generator = () => {
 
    
 
     
-
+// retrives user input 
     rl.question("Please enter your date of birth (YYYY-MM-DD)", (userInput) => {
-
+//  separates days and months 
     if (isValidDate(userInput)) {
       console.log("Valid Date");
       const dateParts = userInput.split("-");
       const month = parseInt(dateParts[1], 10);
       const day = parseInt(dateParts[2], 10);
     
-  
+  // retrieves the astrological sign 
       let astrologySign = "";
       switch (true) {
         case (month === 1 && day >= 20) || (month === 2 && day <= 18):
@@ -155,7 +158,7 @@ const generator = () => {
           astrologySign = "Capricorn";
           break;
       }
-      
+      // gives the right message to the right Sign 
     let astrologyMessage = "";
     switch (astrologySign) {
       case "Aquarius":
@@ -201,16 +204,16 @@ const generator = () => {
 
 
 
-    
+// creates random messages from motivational and joke arrays     
     const randomMotivational = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
     const randomJoke = nonsensicalJokes[Math.floor(Math.random() * nonsensicalJokes.length)];
     
-
+// prints the message
     console.log(`Your astrology sign is ${astrologySign}.\n${astrologyMessage}\n\nInspirational message: ${randomMotivational}\n\nNonsensical joke: ${randomJoke}`);
-} else {
+    rl.close()} else {
     console.log("Invalid date. Please try again!");
+    generator()
 }
-rl.close()
 })
 }
 
